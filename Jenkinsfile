@@ -15,17 +15,19 @@ pipeline{
 
                 stage('Build Docker Image'){
                         steps{
-                                sh 'cd /home/backup/php54'
-				sh 'sudo docker build --tag="php54" .'
-				sh 'sudo docker run -p 80:80 --name phpedsi --rm php54'
+                                sh 'ADD https://github.com/BarreraDavidN/d4a/blob/master/Dockerfile /var/jenkins_home/workspace/Pipeline EDSI'
+								sh 'ADD https://github.com/BarreraDavidN/d4a/blob/master/index.php /var/jenkins_home/workspace/Pipeline EDSI'
+								sh 'ADD https://github.com/BarreraDavidN/d4a/blob/master/db.php /var/jenkins_home/workspace/Pipeline EDSI'
+								sh 'sudo docker build --tag="php54" .'
+								
                         }
 						
                 }
 				
-		stage('Deploy Container'){
+				stage('Deploy Container'){
                         steps{
-                                sh 'cd /home/backup/d4a'
-				sh 'docker-compose up -d'
+                                sh 'ADD https://github.com/BarreraDavidN/d4a/blob/master/docker-compose.yml /var/jenkins_home/workspace/Pipeline EDSI'
+								sh 'docker-compose up -d'
                         }
 						
                 }
