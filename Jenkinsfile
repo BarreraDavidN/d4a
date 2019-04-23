@@ -15,9 +15,9 @@ pipeline{
 
                 stage('Build Docker Image'){
                         steps{
-                                sh 'ADD https://github.com/BarreraDavidN/d4a/blob/master/Dockerfile /var/jenkins_home/workspace/Pipeline EDSI'
-								sh 'ADD https://github.com/BarreraDavidN/d4a/blob/master/index.php /var/jenkins_home/workspace/Pipeline EDSI'
-								sh 'ADD https://github.com/BarreraDavidN/d4a/blob/master/db.php /var/jenkins_home/workspace/Pipeline EDSI'
+                                sh 'COPY https://github.com/BarreraDavidN/d4a/blob/master/Dockerfile /var/jenkins_home/workspace/Pipeline EDSI'
+								sh 'COPY https://github.com/BarreraDavidN/d4a/blob/master/index.php /var/jenkins_home/workspace/Pipeline EDSI'
+								sh 'COPY https://github.com/BarreraDavidN/d4a/blob/master/db.php /var/jenkins_home/workspace/Pipeline EDSI'
 								sh 'sudo docker build --tag="php54" .'
 								
                         }
@@ -26,7 +26,7 @@ pipeline{
 				
 				stage('Deploy Container'){
                         steps{
-                                sh 'ADD https://github.com/BarreraDavidN/d4a/blob/master/docker-compose.yml /var/jenkins_home/workspace/Pipeline EDSI'
+                                sh 'COPY https://github.com/BarreraDavidN/d4a/blob/master/docker-compose.yml /var/jenkins_home/workspace/Pipeline EDSI'
 								sh 'docker-compose up -d'
                         }
 						
